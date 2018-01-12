@@ -1,0 +1,65 @@
+version: '2'
+services:
+
+  dashboard:
+    image: inspiremif/daobs-eea-dashboard-official:latest
+    volumes:
+       - dashboard-official-dir:/daobs-data-dir/
+    networks:
+      - network-dashboard-official
+    container_name: official-dashboard
+
+  elasticsearch:
+    volumes:
+      - esdata-official:/usr/share/elasticsearch/data
+    networks:
+      - network-dashboard-official
+    container_name: official-es0
+
+  elasticsearch-node1:
+    volumes:
+      - esdata1-official:/usr/share/elasticsearch/data
+    networks:
+      - network-dashboard-official
+    container_name: official-es1
+
+  elasticsearch-node2:
+    volumes:
+      - esdata2-official:/usr/share/elasticsearch/data
+    networks:
+      - network-dashboard-official
+    container_name: official-es2
+
+  cerebro:
+    networks:
+      - network-dashboard-official
+    container_name: official-cerebro
+
+  kibana:
+    volumes:
+      - ${PWD}/kibana/config/kibana-official.yml:/usr/share/kibana/config/kibana.yml
+    networks:
+      - network-dashboard-official
+    container_name: official-kibana
+
+  nginx:
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - network-dashboard-official
+    container_name: official-nginx
+
+volumes:
+    esdata-official:
+       driver: local
+    esdata1-official:
+       driver: local
+    esdata2-official:
+       driver: local
+    dashboard-official-dir:
+       driver: local
+
+networks:
+  network-dashboard-official:
+    driver: bridge

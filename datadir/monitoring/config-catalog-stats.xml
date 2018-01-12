@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<reporting xmlns="http://daobs.org" id="catalog">
+  <identification>
+    <title xml:lang="en">Metadata catalog statistics</title>
+    <author>DAOBS Team</author>
+    <url></url>
+  </identification>
+  <variables>
+    <variable id="Nb_Records" numberFormat="#">
+      <name xml:lang="en">Number of records</name>
+      <query>+documentType:metadata</query>
+      <value>0</value>
+      <comment>Number of records in the catalog.</comment>
+    </variable>
+    <variable id="Nb_Services" numberFormat="#">
+      <name xml:lang="en">Number of services</name>
+      <query>+documentType:metadata +resourceType:service</query>
+      <value>0</value>
+      <comment>Number of records describing services.</comment>
+    </variable>
+    <variable id="Nb_Datasets" numberFormat="#">
+      <name xml:lang="en">Number of datasets</name>
+      <query>+documentType:metadata +resourceType:dataset</query>
+      <value>0</value>
+      <comment>Number of records describing datasets.</comment>
+    </variable>
+    <variable id="Nb_Applications" numberFormat="#">
+      <name xml:lang="en">Number of applications</name>
+      <query>+documentType:metadata +resourceType:application</query>
+      <value>0</value>
+      <comment>Number of records describing applications.</comment>
+    </variable>
+    <variable id="Nb_OpenData">
+      <name xml:lang="en">Number of open data records</name>
+      <query>+documentType:metadata +thesaurus_geonetworkthesauruslocalthemeinfraSIG.keyword:"Open data"</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of records defined as open data. Based on InfraSIG thesaurus from Metawal.</comment>
+    </variable>
+    <variable id="Nb_NotOpenData">
+      <name xml:lang="en">Number of "close data" records</name>
+      <query>+documentType:metadata +thesaurus_geonetworkthesauruslocalthemeinfraSIG.keyword:"Open DataNO"</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of records defined as not open data. Based on InfraSIG thesaurus from Metawal.</comment>
+    </variable>
+    <variable id="Nb_License">
+      <name xml:lang="en">Number of records with license</name>
+      <query>+documentType:metadata +accessConstraints:license</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of records including license</comment>
+    </variable>
+    <variable id="Nb_IntellectualPropertyRights">
+      <name xml:lang="en">Number of records with intellectual property rights</name>
+      <query>+documentType:metadata +accessConstraints:intellectualPropertyRights</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment></comment>
+    </variable>
+    <variable id="Nb_OtherRestrictions">
+      <name xml:lang="en">Number of records with others restrictions</name>
+      <query>+documentType:metadata +accessConstraints:otherRestrictions</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment></comment>
+    </variable>
+    <variable id="Nb_Restricted">
+      <name xml:lang="en">Number of restricted records</name>
+      <query>+documentType:metadata +accessConstraints:restricted</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of records including restriction</comment>
+    </variable>
+    <variable id="Nb_RevisionDate_OneYear">
+      <name xml:lang="en">Number of revised metadata (one year from now)</name>
+      <query>+documentType:metadata +dateStamp:[now-1y TO now]</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>From the date of the report creation.</comment>
+    </variable>
+    <variable id="Nb_RevisionDate_2017">
+      <name xml:lang="en">Number of revised metadata (2017)</name>
+      <query>+documentType:metadata +dateStamp:[2017-01-01 TO 2017-12-31]</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment></comment>
+    </variable>
+    <variable id="Custodian_DG01">
+      <name xml:lang="en">DGO1 members</name>
+      <query>+documentType:metadata +custodianOrgForResource:*DGO1*</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Metawal only</comment>
+    </variable>
+    <variable id="Nb_Valid">
+      <name xml:lang="en">Number of valid records</name>
+      <query>+documentType:metadata +isValid:true</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of records that pass the internal validation test</comment>
+    </variable>
+    <variable id="Nb_SchemaValid">
+      <name xml:lang="en">Number of records with valid schema</name>
+      <query>+documentType:metadata +isSchemaValid:true</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of records that are valid against xml schema</comment>
+    </variable>
+    <variable id="Nb_INSPIRE">
+      <name xml:lang="en">Number of official INSPIRE records</name>
+      <query>+documentType:metadata +thesaurus_geonetworkthesauruslocalthemeinfraSIG.keyword:"Reporting INSPIRE"</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of records that reference the keyword "Reporting INSPIRE"</comment>
+    </variable>
+    <variable id="Nb_INSPIRENO">
+      <name xml:lang="en">Number of official records officially excluded from INSPIRE</name>
+      <query>+documentType:metadata +thesaurus_geonetworkthesauruslocalthemeinfraSIG.keyword:"Reporting INSPIRENO"
+      </query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of records that reference the keyword "Reporting INSPIRENO"</comment>
+    </variable>
+    <variable id="Nb_INSPIREundefined">
+      <name xml:lang="en">Number of records with undefined INSPIRE status</name>
+      <query>+documentType:metadata -thesaurus_geonetworkthesauruslocalthemeinfraSIG.keyword:"Reporting INSPIRENO"
+        -thesaurus_geonetworkthesauruslocalthemeinfraSIG.keyword:"Reporting INSPIRE"
+      </query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of records that do not reference "Reporting INSPIRE" nor "Reporting INSPIRENO"</comment>
+    </variable>
+    <variable id="Nb_INSPIREconformant">
+      <name xml:lang="en">Number of records that have conformant metadata</name>
+      <query>+documentType:metadata +thesaurus_geonetworkthesauruslocalthemeinfraSIG.keyword:"Reporting INSPIRE"
+        +isAboveThreshold:true
+      </query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of records that have conformant metadata</comment>
+    </variable>
+    <variable id="Nb_SchemaValid_NotINSPIRE">
+      <name xml:lang="en">Number of records out of INSPIRE scope that have a valid schema</name>
+      <query>+documentType:metadata +isSchemaValid:true
+        -thesaurus_geonetworkthesauruslocalthemeinfraSIG.keyword:"Reporting INSPIRE"
+      </query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of records out of INSPIRE scope that have a valid schema</comment>
+    </variable>
+    <variable id="Nb_SchemaValid_NSPIRE">
+      <name xml:lang="en">Number of official INSPIRE records that have a valid schema</name>
+      <query>+documentType:metadata +isSchemaValid:true
+        +thesaurus_geonetworkthesauruslocalthemeinfraSIG.keyword:"Reporting INSPIRE"
+      </query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of official INSPIRE records that have a valid schema</comment>
+    </variable>
+    <variable id="Nb_RecordsWithThesaurusGeoportail">
+      <name xml:lang="en">Nb_RecordsWithThesaurusGeoportail</name>
+      <query>+documentType:metadata +thesaurus_geonetworkthesaurusexternalthemeThemesgeoportailwallon:*</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Nb_RecordsWithThesaurusGeoportail</comment>
+    </variable>
+    <variable id="Nb_RecordsWithThesaurusGEMETorINSPIRE">
+      <name xml:lang="en">Number of records that have keywords from GEMET themes or INSPIRE themes thesauri</name>
+      <query>+documentType:metadata +(thesaurus_geonetworkthesaurusexternalthemegemettheme:* OR
+        thesaurus_geonetworkthesaurusexternalthemeinspiretheme:*)
+      </query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of records that have keywords from GEMET themes or INSPIRE themes thesauri</comment>
+    </variable>
+    <variable id="nb_Portrayal">
+      <name xml:lang="en">Number of datasets that have portrayal information</name>
+      <query>+documentType:metadata +codelist_function:*information.portrayal* +resourceType:dataset</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of datasets that have a link to portrayal information</comment>
+    </variable>
+    <variable id="Nb_DataSetWithThumbnail">
+      <name xml:lang="en">Number of dataset that have a thumbnail</name>
+      <query>+documentType:metadata +resourceType:dataset +overviewUrl:*</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of dataset that have a thumbnail</comment>
+    </variable>
+    <variable id="Nb_Model">
+      <name xml:lang="en">Number of datasets that have data model information</name>
+      <query>+documentType:metadata +codelist_function:*information.content* +resourceType:dataset</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of datasets that have a link to a data model</comment>
+    </variable>
+    <variable id="Nb_Quality">
+      <name xml:lang="en">Number of datasets that have quality information</name>
+      <query>+documentType:metadata +codelist_function:*information.quality* +resourceType:dataset</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of datasets that have a link to quality information</comment>
+    </variable>
+    <variable id="Nb_Lineage">
+      <name xml:lang="en">Number of datasets that have lineage information</name>
+      <query>+documentType:metadata +lineage:* +resourceType:dataset</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of datasets that have lineage information</comment>
+    </variable>
+    <variable id="Nb_Information">
+      <name xml:lang="en">Number of datasets that have supplement information</name>
+      <query>+documentType:metadata +codelist_function:(*information,* or information or *,information)
+        +resourceType:dataset
+      </query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of datasets that have a link to a website or document with more information</comment>
+    </variable>
+    <variable id="Nb_RecordsWithGeoportailKeywords">
+      <name xml:lang="en">Number of records that have geoportail keyword</name>
+      <query>+documentType:metadata +tag:*0*</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of records that have geoportail keyword</comment>
+    </variable>
+    <variable id="Nb_ConnectionsServiceToData">
+      <name xml:lang="en">Number of service records connected to at least one dataset/series record</name>
+      <query>+documentType:metadata +resourceType:service +recordOperateOn:*</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of service records connected to at least one dataset/series record</comment>
+    </variable>
+    <variable id="Nb_ConnectionDatasetToService">
+      <name xml:lang="en">Number of dataset records connected to at least one service</name>
+      <query>+documentType:metadata +resourceType:(dataset or series) +recordOperatedBy:*</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of dataset records connected to at least one service</comment>
+    </variable>
+    <variable id="Nb_ConnectionsDataToData">
+      <name xml:lang="en">Number of datast/series records connected to at least one dataset/series record</name>
+      <query>+documentType:metadata +resourceType:(dataset or series) +codelist_associationType:*</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of datast or series records connected to at least one dataset or series record</comment>
+    </variable>
+    <variable id="Nb_DatasetsSeries">
+      <name xml:lang="en">Number of dataset and series records</name>
+      <query>+documentType:metadata +resourceType:(dataset or series)</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of dataset and series records</comment>
+    </variable>
+    <variable id="test isAboveThreshold">
+      <name xml:lang="en">test isAboveThreshold</name>
+      <query>+documentType:metadata +thesaurus_geonetworkthesauruslocalthemeinfraSIG.keyword:"Reporting INSPIRE"
+        +isAboveThreshold:false
+      </query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>test isAboveThreshold</comment>
+    </variable>
+    <variable id="Nb_series">
+      <name xml:lang="en">Number of series records</name>
+      <query>+documentType:metadata +resourceType:series</query>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of series records</comment>
+    </variable>
+  </variables>
+  <indicators>
+    <indicator id="OpenData_index">
+      <name xml:lang="en">Index of open data</name>
+      <expression>Nb_OpenData/Nb_Records*100</expression>
+      <parameters>
+        <parameter id="100" error="true" status="undefined" value="0"/>
+        <parameter id="Nb_Records" error="true" status="set" value="0.0"/>
+        <parameter id="Nb_OpenData" error="true" status="set" value="0.0"/>
+      </parameters>
+      <format>string</format>
+
+      <comment>Index of open data</comment>
+    </indicator>
+    <indicator id="Nb_INSPIREnotconformant">
+      <name xml:lang="en">Number of records that reference the keyword "Reporting INSPIRE" and haven't conformant
+        metadata
+      </name>
+      <expression>Nb_INSPIRE - Nb_INSPIREconformant</expression>
+      <parameters>
+        <parameter id="Nb_INSPIREconformant" error="true" status="set" value="0.0"/>
+        <parameter id="-" error="true" status="undefined" value="0"/>
+        <parameter id="Nb_INSPIRE" error="true" status="set" value="0.0"/>
+      </parameters>
+      <format>string</format>
+      <value>0.0</value>
+      <comment>Number of records that reference the keyword "Reporting INSPIRE" and haven't conformant metadata
+      </comment>
+    </indicator>
+    <indicator id="ConformityScore">
+      <name xml:lang="en">Conformity Score</name>
+      <expression>(Nb_INSPIREconformant + Nb_SchemaValid_NotINSPIRE) / Nb_Records</expression>
+      <parameters>
+        <parameter id="Nb_Records" error="true" status="set" value="0.0"/>
+        <parameter id="Nb_SchemaValid_NotINSPIRE" error="true" status="set" value="0.0"/>
+        <parameter id="Nb_INSPIREconformant" error="true" status="set" value="0.0"/>
+      </parameters>
+      <format>string</format>
+
+      <comment>(Number of INSPIRE conformant records + Number of non-INSPIRE records with valid schema) / Total of
+        records
+      </comment>
+    </indicator>
+    <indicator id="UsabilityScore">
+      <name xml:lang="en">Usability Score</name>
+      <expression>(Nb_Information + Nb_Lineage + Nb_Model + nb_Portrayal + Nb_Quality)/(Nb_Datasets * 5)</expression>
+      <parameters>
+        <parameter id="5" error="true" status="undefined" value="0"/>
+        <parameter id="Nb_Datasets" error="true" status="set" value="0.0"/>
+        <parameter id="Nb_Quality" error="true" status="set" value="0.0"/>
+        <parameter id="nb_Portrayal" error="true" status="set" value="0.0"/>
+        <parameter id="Nb_Model" error="true" status="set" value="0.0"/>
+        <parameter id="Nb_Lineage" error="true" status="set" value="0.0"/>
+        <parameter id="Nb_Information" error="true" status="set" value="0.0"/>
+      </parameters>
+      <format>string</format>
+
+      <comment>Datasets with information that help people to use the data (data quality information, lineage
+        information, data model information, portrayal information, general information related to the dataset)
+      </comment>
+    </indicator>
+    <indicator id="UpdateScore">
+      <name xml:lang="en">Update Score</name>
+      <expression>Nb_RevisionDate_OneYear/Nb_Records</expression>
+      <parameters>
+        <parameter id="Nb_Records" error="true" status="set" value="0.0"/>
+        <parameter id="Nb_RevisionDate_OneYear" error="true" status="set" value="0.0"/>
+      </parameters>
+      <format>string</format>
+
+      <comment>%age of records that have been updated over one year</comment>
+    </indicator>
+    <indicator id="DiscoverabilityScore">
+      <name xml:lang="en">Discoverability Score</name>
+      <expression>(Nb_ConnectionsServiceToData + Nb_ConnectionDatasetToService + Nb_ConnectionsDataToData +
+        Nb_DataSetWithThumbnail + Nb_RecordsWithThesaurusGEMETorINSPIRE +
+        Nb_RecordsWithThesaurusGeoportail)/(Nb_Services + Nb_DatasetsSeries + Nb_DatasetsSeries + Nb_Datasets +
+        Nb_Records + Nb_Records)
+      </expression>
+      <parameters>
+        <parameter id="Nb_Records" error="true" status="set" value="0.0"/>
+        <parameter id="Nb_Records" error="true" status="set" value="0.0"/>
+        <parameter id="Nb_Datasets" error="true" status="set" value="0.0"/>
+        <parameter id="Nb_DatasetsSeries" error="true" status="set" value="0.0"/>
+        <parameter id="Nb_DatasetsSeries" error="true" status="set" value="0.0"/>
+        <parameter id="Nb_Services" error="true" status="set" value="0.0"/>
+        <parameter id="Nb_RecordsWithThesaurusGeoportail" error="true" status="set" value="0.0"/>
+        <parameter id="Nb_RecordsWithThesaurusGEMETorINSPIRE" error="true" status="set" value="0.0"/>
+        <parameter id="Nb_DataSetWithThumbnail" error="true" status="set" value="0.0"/>
+        <parameter id="Nb_ConnectionsDataToData" error="true" status="set" value="0.0"/>
+        <parameter id="Nb_ConnectionDatasetToService" error="true" status="set" value="0.0"/>
+        <parameter id="Nb_ConnectionsServiceToData" error="true" status="set" value="0.0"/>
+      </parameters>
+      <format>string</format>
+      <comment>Index that calculates how discoverable a record is, based on its connectivity with other records,
+        presence of keywords and presence of thumbnail (only for datasets)
+      </comment>
+    </indicator>
+    <indicator id="GlobalQualityScore">
+      <name xml:lang="en">Global Quality Score</name>
+      <expression>(ConformityScore + DiscoverabilityScore + UpdateScore + UsabilityScore) / 4</expression>
+      <parameters>
+        <parameter id="4" error="true" status="undefined" value="0"/>
+        <parameter id="UsabilityScore" error="true" status="undefined" value="0"/>
+        <parameter id="UpdateScore" error="true" status="undefined" value="0"/>
+        <parameter id="DiscoverabilityScore" error="true" status="undefined" value="0"/>
+        <parameter id="ConformityScore" error="true" status="undefined" value="0"/>
+      </parameters>
+      <format>string</format>
+      <comment>Global Quality Score</comment>
+    </indicator>
+  </indicators>
+</reporting>

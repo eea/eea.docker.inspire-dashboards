@@ -1,0 +1,81 @@
+version: '2'
+services:
+
+  dashboard:
+    depends_on:
+      - "kibana"
+    command: ["bash", "/wait-for-it.sh", "kibana:5601", "-t", "0", "--", "/docker-entry.sh"]
+
+  elasticsearch:
+    image: inspiremif/elasticsearch:latest
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 1g
+    environment:
+      - NODE_NAME=elasticsearch
+      - MINIMUM_MASTER_NODE=0
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - ELASTICSEARCH_MASTER=YES
+
+  elasticsearch-node1:
+    image: inspiremif/elasticsearch:latest
+    depends_on:
+      - "elasticsearch"
+    environment:
+      - NODE_NAME=elasticsearch-node1
+      - MINIMUM_MASTER_NODE=0
+      - DISCOVERY_ZEN="elasticsearch"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - ELASTICSEARCH_MASTER=NO
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 1g
+
+  elasticsearch-node2:
+    image: inspiremif/elasticsearch:latest
+    depends_on:
+      - "elasticsearch"
+    environment:
+      - NODE_NAME=elasticsearch-node2
+      - MINIMUM_MASTER_NODE=0
+      - DISCOVERY_ZEN="elasticsearch"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - ELASTICSEARCH_MASTER=NO
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 1g
+
+  cerebro:
+    image: snuids/cerebro:v0.7.1
+    depends_on:
+      - "elasticsearch"
+    volumes:
+      - ./cerebro/config/application.conf:/opt/cerebro/conf/application.conf
+    container_name: sandbox-cerebro
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:5.6.5
+    volumes:
+      - ${PWD}/kibana/wait-for-it.sh:/wait-for-it.sh
+      - ${PWD}/kibana/docker-entry.sh:/docker-entry.sh
+    depends_on:
+      - "elasticsearch"
+    command: ["bash", "/wait-for-it.sh", "elasticsearch:9200", "-t", "0", "--", "/docker-entry.sh"]
+
+  nginx:
+    hostname: nginx
+    image: nginx:stable-alpine
+    volumes:
+      - ${SSL_CERTS_DIR}/${SSL_PUB}:/etc/nginx/certs/cert.crt
+      - ${SSL_KEY_DIR}/${SSL_PRIV}:/etc/nginx/private/priv.key
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      #- ./nginx/nginx-ssl.conf:/etc/nginx/nginx.conf
+      - ./nginx/wait-for-it.sh:/wait-for-it.sh
+    depends_on:
+      - "dashboard"

@@ -1,0 +1,65 @@
+version: '2'
+services:
+
+  dashboard:
+    image: inspiremif/daobs-eea-dashboard-sandbox:latest
+    volumes:
+       - dashboard-sandbox-dir:/daobs-data-dir/
+    networks:
+      - network-dashboard-sandbox
+    container_name: sandbox-dashboard
+
+  elasticsearch:
+    volumes:
+      - esdata-sandbox:/usr/share/elasticsearch/data
+    networks:
+      - network-dashboard-sandbox
+    container_name: sandbox-es0
+
+  elasticsearch-node1:
+    volumes:
+      - esdata1-sandbox:/usr/share/elasticsearch/data
+    networks:
+      - network-dashboard-sandbox
+    container_name: sandbox-es1
+
+  elasticsearch-node2:
+    volumes:
+      - esdata2-sandbox:/usr/share/elasticsearch/data
+    networks:
+      - network-dashboard-sandbox
+    container_name: sandbox-es2
+
+  cerebro:
+    networks:
+      - network-dashboard-sandbox
+    container_name: sandbox-cerebro
+
+  kibana:
+    volumes:
+      - ${PWD}/kibana/config/kibana-dashboard.yml:/usr/share/kibana/config/kibana.yml
+    networks:
+      - network-dashboard-sandbox
+    container_name: sandbox-kibana
+
+  nginx:
+    ports:
+      - "81:80"
+      - "444:443"    
+    networks:
+      - network-dashboard-sandbox
+    container_name: sandbox-nginx
+
+volumes:
+    esdata-sandbox:
+       driver: local
+    esdata1-sandbox:
+       driver: local
+    esdata2-sandbox:
+       driver: local
+    dashboard-sandbox-dir:
+       driver: local
+
+networks:
+  network-dashboard-sandbox:
+    driver: bridge
