@@ -10,14 +10,6 @@ To run the composition:
 
 
 ```bash
-
-# Download ETF (used by the sandbox one mainly)
-wget http://www.geostandaarden.nl/validatie/inspire/versies/1.5/ETF1.5.zip
-unzip ETF1.5.zip
-mv ETF1.5/ETF ETF
-rm -fr ETF1.5
-
-
 # Start composition
 sudo sysctl -w vm.max_map_count=262144
 docker-compose -p dashboard-sandbox -f docker-compose-canonical.yml -f docker-compose-eea-dashboard-sandbox.yml up
