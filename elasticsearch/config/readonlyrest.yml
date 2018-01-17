@@ -14,14 +14,14 @@ readonlyrest:
   ldaps:
     - name: ldap
       host: "ldap.eionet.europa.eu"
-      port: 389
-      ssl_enabled: false
+      port: 636
+      ssl_enabled: true
       ssl_trust_all_certs: true
 #        bind_dn: "cn=admin,dc=example,dc=com"
 #        bind_password: "password"
       search_user_base_DN: "ou=Users,o=EIONET,l=Europe"
       user_id_attribute: "uid"
-      search_groups_base_DN: "ou=Groups,o=EIONET,l=Europe"
+      search_groups_base_DN: "ou=Roles,o=EIONET,l=Europe"
       unique_member_attribute: "uniqueMember"
       connection_pool_size: 10
       connection_timeout_in_sec: 10
@@ -62,7 +62,7 @@ readonlyrest:
       name: "ldap"
     ldap_authorization:
       name: "ldap"
-      groups: ["extranet"]
+      groups: ["extranet","extranet-inspire-reporter","extranet-inspire-dashboard"]
     kibana_access: rw
     kibana_index: .dashboards
     verbosity: info
