@@ -16,7 +16,9 @@ services:
     mem_limit: 1g
     environment:
       - NODE_NAME=elasticsearch
-      - MINIMUM_MASTER_NODE=0
+      - MINIMUM_MASTER_NODE=2
+      - NODE_DATA=true
+      - NODE_MASTER=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - ELASTICSEARCH_MASTER=YES
     restart: always
@@ -27,7 +29,9 @@ services:
       - "elasticsearch"
     environment:
       - NODE_NAME=elasticsearch-node1
-      - MINIMUM_MASTER_NODE=0
+      - MINIMUM_MASTER_NODE=2
+      - NODE_DATA=true
+      - NODE_MASTER=true
       - DISCOVERY_ZEN="elasticsearch"
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - ELASTICSEARCH_MASTER=NO
@@ -44,7 +48,9 @@ services:
       - "elasticsearch"
     environment:
       - NODE_NAME=elasticsearch-node2
-      - MINIMUM_MASTER_NODE=0
+      - MINIMUM_MASTER_NODE=2
+      - NODE_DATA=true
+      - NODE_MASTER=false
       - DISCOVERY_ZEN="elasticsearch"
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - ELASTICSEARCH_MASTER=NO
@@ -89,5 +95,5 @@ services:
         - SSL_PUB
         - SSL_KEY_DIR
         - SSL_PRIV
-    restart: always        
+    restart: always
     command: ["sh", "./entry-point.sh"]
