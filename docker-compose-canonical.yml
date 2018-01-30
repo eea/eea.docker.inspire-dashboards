@@ -4,6 +4,7 @@ services:
   dashboard:
     depends_on:
       - "kibana"
+    restart: always
     command: ["bash", "/wait-for-it.sh", "kibana:5601", "-t", "0", "--", "/docker-entry.sh"]
 
   elasticsearch:
@@ -18,6 +19,7 @@ services:
       - MINIMUM_MASTER_NODE=0
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - ELASTICSEARCH_MASTER=YES
+    restart: always
 
   elasticsearch-node1:
     image: inspiremif/elasticsearch:latest
@@ -34,6 +36,7 @@ services:
         soft: -1
         hard: -1
     mem_limit: 1g
+    restart: always
 
   elasticsearch-node2:
     image: inspiremif/elasticsearch:latest
@@ -50,6 +53,7 @@ services:
         soft: -1
         hard: -1
     mem_limit: 1g
+    restart: always
 
   cerebro:
     image: snuids/cerebro:v0.7.1
@@ -57,6 +61,7 @@ services:
       - "elasticsearch"
     volumes:
       - ./cerebro/config/application.conf:/opt/cerebro/conf/application.conf
+    restart: always
     container_name: sandbox-cerebro
 
   kibana:
@@ -66,6 +71,7 @@ services:
       - ${PWD}/kibana/docker-entry.sh:/docker-entry.sh
     depends_on:
       - "elasticsearch"
+    restart: always
     command: ["bash", "/wait-for-it.sh", "elasticsearch:9200", "-t", "0", "--", "/docker-entry.sh"]
 
   nginx:
@@ -83,4 +89,5 @@ services:
         - SSL_PUB
         - SSL_KEY_DIR
         - SSL_PRIV
+    restart: always        
     command: ["sh", "./entry-point.sh"]
