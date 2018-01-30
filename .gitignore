@@ -1,3 +1,6 @@
 ETF1.5.zip
 ETF
 .idea
+clean_ssl_vars.sh 
+export_ssl_vars.ssh 
+
