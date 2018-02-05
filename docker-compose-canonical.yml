@@ -4,6 +4,8 @@ services:
   dashboard:
     depends_on:
       - "kibana"
+    environment:
+      - PASSWORD=changeme # n.b.: needs to match the credentials on kibana
     restart: always
     command: ["bash", "/wait-for-it.sh", "kibana:5601", "-t", "0", "--", "/docker-entry.sh"]
 
@@ -75,8 +77,8 @@ services:
   kibana:
     image: inspiremif/kibana:latest
     environment:
-      - "ELASTICSEARCH_USERNAME=changeme"
-      - "ELASTICSEARCH_PASSWORD=changeme"
+      - "USERNAME=changeme"
+      - "PASSWORD=changeme"
     depends_on:
       - "elasticsearch"
     restart: always
