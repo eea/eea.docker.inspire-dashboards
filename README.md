@@ -18,8 +18,8 @@ docker-compose -p dashboard-official -f docker-compose-canonical.yml -f docker-c
 
 Then open the applications with:
 
-* https://localhost:444/dashboard
-* https://localhost/official
+* https://localhost:81
+* https://localhost
 
 Then for the official node, change the default account in user.properties in the dashboard-official volume and change it also for the kibana_rw user in readonlyrest.yml.
 
@@ -34,7 +34,7 @@ The official node contains all past monitoring made by Member States. 2011 to 20
 ![Submit monitoring](/img/submit-monitoring.png)
 
 
-The sandbox node is used by Member States to easily create the monitoring from the content harvested from their discovery service. 
+The sandbox node is used by Member States to easily create the monitoring from the content harvested from their discovery service.
 
 
 
