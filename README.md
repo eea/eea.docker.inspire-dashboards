@@ -10,7 +10,6 @@ To run the composition:
 
 
 ```bash
-sudo sysctl -w vm.max_map_count=262144
 docker-compose -p dashboard-sandbox -f docker-compose-canonical.yml -f docker-compose-eea-dashboard-sandbox.yml up
 docker-compose -p dashboard-official -f docker-compose-canonical.yml -f docker-compose-eea-dashboard-official.yml up
 
