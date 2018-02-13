@@ -48,6 +48,7 @@ services:
       - DASHBOARD_URL=http://dashboard:8080
     networks:
       - network-dashboard-official
+      - ES_URL=http://official-es0:9200      
     container_name: official-nginx
 
   sysctl:
